@@ -1,0 +1,203 @@
+---
+swagger: "2.0"
+info:
+  description: "REST-API die als Layer zwischen der UI und dem Backend agiert."
+  version: "1.0.0"
+  title: "RecommendationSystem-Gateway (REST-API)"
+basePath: "/v1"
+schemes:
+- "http"
+paths:
+  /login:
+    post:
+      tags:
+      - "authentification"
+      description: "Endpoint for login"
+      operationId: "loginPOST"
+      produces:
+      - "application/json"
+      parameters:
+        - name: "body"
+          in: "body"
+          description: "Login-Data"
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: "string"
+              pw:
+                type: "string"
+            example:
+              email: "test@hotmail.com"
+              pw: "12345678"
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+        500:
+          description: "Internal Server Error"
+      x-swagger-router-controller: "Recommendation"
+  
+  /signin:
+    post:
+      tags:
+      - "authentification"
+      description: "Endpoint for signin"
+      operationId: "signinPOST"
+      produces:
+      - "application/json"
+      parameters:
+        - name: "body"
+          in: "body"
+          description: "Signin-Data"
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: "string"
+              surname:
+                type: "string"
+              email:
+                type: "string"
+              pw:
+                type: "string"
+            example:
+              name: "Meris"
+              surname: "Krupic"
+              email: "test@hotmail.com"
+              pw: "12345678"
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+        500:
+          description: "Internal Server Error"
+      x-swagger-router-controller: "Recommendation"
+  
+  /recommendations:
+    get:
+      tags:
+      - "article"
+      description: "Endpoint for geting top 10 Recommendations"
+      operationId: "recommendationsGET"
+      produces:
+      - "application/json"
+      parameters:
+        - name: "userId"
+          in: "query"
+          description: "User ID"
+          required: true
+          type: "integer"
+          default: 1
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+        500:
+          description: "Internal Server Error"
+      x-swagger-router-controller: "Recommendation"
+  
+  /article:
+    get:
+      tags:
+      - "article"
+      description: "Endpoint for geting Article by ID"
+      operationId: "articleGET"
+      produces:
+      - "application/json"
+      parameters:
+        - name: "id"
+          in: "query"
+          description: "ID of an Article"
+          required: true
+          type: "integer"
+          default: 123
+        - name: "userId"
+          in: "query"
+          description: "ID of an User"
+          required: true
+          type: "integer"
+          default: 1
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+        500:
+          description: "Internal Server Error"
+      x-swagger-router-controller: "Recommendation"
+  
+  /search:
+    get:
+      tags:
+      - "article"
+      description: "Endpoint for searching for Articles"
+      operationId: "searchGET"
+      produces:
+      - "application/json"
+      parameters:
+        - name: "name"
+          in: "query"
+          description: "Name of an Article"
+          required: true
+          type: "string"
+          default: "NodeJS"
+        - name: "userId"
+          in: "query"
+          description: "User ID"
+          required: true
+          type: "integer"
+          default: 1
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+        500:
+          description: "Internal Server Error"
+      x-swagger-router-controller: "Recommendation"
+
+  /rate:
+    patch:
+      tags:
+      - "article"
+      description: "Endpoint for rating an Article"
+      operationId: "ratePATCH"
+      produces:
+      - "application/json"
+      parameters:
+        - name: "body"
+          in: "body"
+          description: "Rating-Data"
+          required: true
+          schema:
+            type: object
+            properties:
+              id:
+                type: "integer"
+              userId:
+                type: "integer"
+              stars:
+                type: "string"
+            example:
+              id: 123
+              userId: 1
+              stars: '4'
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+        500:
+          description: "Internal Server Error"
+      x-swagger-router-controller: "Recommendation"
+definitions:
+  errorResponse:
+    properties:
+      message: 
+        type: "string"
