@@ -1,29 +1,16 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
-=======
-import React, { useState } from 'react';
->>>>>>> 7b630c4d029eec84d559a9fc87e94fa52664b076
 import GlobalCSS from '../components/GlobalCSS';
 import Header from '../components/Header';
 import Recommendations from '../components/recommendations/Recommendations';
 import Article from '../components/article/Article';
 import HamburgerIcon from '../static/h-manu-icon.svg';
-<<<<<<< HEAD
 import fetch from 'isomorphic-unfetch';
 import configData from '../config/configData';
 import Loader from 'react-loader-spinner';
 import { toast, ToastContainer } from 'react-nextjs-toast';
 
 const Home = ({userId}) => {
-    // const [userId, setUserId] = useState(props.url.query.userId | 0);
     const [recommendationData, setRecommendationData] = useState([]);
-=======
-import fetch from 'isomorphic-unfetch'
-import configData from '../config/configData'
-import Loader from 'react-loader-spinner'
-
-const Home = ({ userId, recommendationData }) => {
->>>>>>> 7b630c4d029eec84d559a9fc87e94fa52664b076
     const [loading, setLoading] = useState(false);
     const [showRec, setShowRec] = useState(true)
     const [showSearchRes, setShowSearchRes] = useState(false);
